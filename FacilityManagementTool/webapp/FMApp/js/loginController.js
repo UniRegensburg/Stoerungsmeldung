@@ -98,6 +98,10 @@ var LoginController = (function() {
         type: "POST",
         dataType: 'json',
         data: ({ "nds": userAcc}),
+        error: function(jxhr, status, error) {
+          if (jxhr.status == 408)
+            _showTimeoutErrorMessage();
+        },
         success: function(data) {
           result = data;
           //CHeck whether the success value of the json object is true or false
@@ -113,6 +117,18 @@ var LoginController = (function() {
     }else{
       mainView.router.loadPage(myApp.offlineURL);
     }
+  }
+
+  //Show an error message if the server sends a timeout error
+  //Enable the login buttons
+  function _showTimeoutErrorMessage(){
+    if(document.documentElement.lang == "de"){
+      FMApp.alert("Der Server benötigt zu lange um zu antworten. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut.");
+    }else{
+      FMApp.alert("The server is taking to long to respond. Please try again later.");
+    }
+    $(".button-nds")[1].disabled = false;
+    $(".button-nds")[0].disabled = false;
   }
 
   //Show an error message if the checked nds account doesnt exist

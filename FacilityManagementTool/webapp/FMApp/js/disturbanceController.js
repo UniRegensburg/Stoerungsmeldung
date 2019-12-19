@@ -396,6 +396,10 @@ var DisturbanceController = (function() {
                 "userPhone": userPhone, "description": description,
                 "building": activeBuilding, "floor": activeFloor, 
                 "room": activeRoom, "specialGroup": specGrp, "testMode": myApp.testMode}),
+        error: function(jxhr, status, error) {
+          if (jxhr.status == 408)
+            _showTimeoutErrorMessage();
+        },
         success: function(data) {
           result = JSON.parse(data);
             //CHeck whether the success value of the returned json object is 
@@ -412,6 +416,18 @@ var DisturbanceController = (function() {
     }else{
       mainView.router.loadPage(myApp.offlineURL);
     }
+  }
+
+  //Show an error message if the server sends a timeout error
+  //Enable the login buttons
+  function _showTimeoutErrorMessage(){
+    if(document.documentElement.lang == "de"){
+      FMApp.alert("Der Server benötigt zu lange um zu antworten. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut.");
+    }else{
+      FMApp.alert("The server is taking to long to respond. Please try again later.");
+    }
+    $(".check-button")[1].disabled = false;
+    $(".check-button")[0].disabled = false;
   }
 
   //Show an error alert

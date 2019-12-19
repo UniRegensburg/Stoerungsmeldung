@@ -160,6 +160,10 @@ var DataController = (function() {
           data : fd,
           processData: false,  // tell jQuery not to process the data
           contentType: false,  // tell jQuery not to set contentType
+          error: function(jxhr, status, error) {
+            if (jxhr.status == 408)
+              _showTimeoutErrorMessage();
+          },
           success : function(data) {
             result = JSON.parse(data);
             //CHeck whether the success value of the returned json object is 
@@ -178,6 +182,15 @@ var DataController = (function() {
       }
     }else{
       mainView.loadPage(myApp.offlineURL);
+    }
+  }
+
+  //Show an error message if the server sends a timeout error
+  function _showTimeoutErrorMessage(){
+    if(document.documentElement.lang == "de"){
+      FMApp.alert("Der Server benötigt zu lange um zu antworten. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut.");
+    }else{
+      FMApp.alert("The server is taking to long to respond. Please try again later.");
     }
   }
 
