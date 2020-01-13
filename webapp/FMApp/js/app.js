@@ -64,7 +64,7 @@ myApp = {
     localSpecialistGroupCsv: "csv/fachgruppenSchluesselwoerter.csv",
     localBuildingCsv: "csv/raumliste.csv",
     //Variable containing the server Url
-    urSrvURL: 'http://oa.mi.ur.de/~gog59212/FMApp/server/php/',
+    urSrvURL: 'https://tools.mi.ur.de/FMApp/server/php/',
     //In testmode the server doesnt send the malfunction report
     testMode: true,
     //If updateGrpOnChar is true the specialist group in the normal malfunction 
