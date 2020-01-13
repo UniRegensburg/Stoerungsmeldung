@@ -58,7 +58,7 @@ img/i-form-settings-material.svg
 
 # Fallback content
 FALLBACK:
-/~gog59212/FMApp /~gog59212/FMApp/offline.html
+/ /offline.html
 
 # Files listed here may come from the network if they arent available in the cache and the user is online
 NETWORK:
